@@ -1,0 +1,7 @@
+#! /bin/env bash
+vlog ../src/generic_ahb_arbiter.v
+vlog ../bench/bench_generic_ahb_arbiter.v
+vsim -c -novopt bench_generic_arbiter_full  -do "log -r /*; run -all ;quit -f " 2>&1|tee transcript.log
+echo "converting to vcd...."
+wlf2vcd vsim.wlf > vsim.vcd
+gtkwave vsim.vcd &
